@@ -36,7 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title=@"气氛";
-
+    
+    self.edgesForExtendedLayout=UIRectEdgeNone;
 //    UIImageView * bgView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"] ]];
 //    bgView.frame=CGRectMake(0, 0, 320, 480);
 //    [self.view addSubview:bgView];

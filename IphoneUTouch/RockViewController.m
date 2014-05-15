@@ -8,6 +8,8 @@
 
 #import "RockViewController.h"
 
+extern CGRect MainRect;
+
 @interface RockViewController ()
 
 @end
@@ -34,8 +36,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title=@"沙锤";
+    self.edgesForExtendedLayout=UIRectEdgeNone;
     UIImageView * BGImage = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"yao" ofType:@"jpg"inDirectory:@"newImages/"]]];
-    [BGImage setFrame:CGRectMake(0, 0, 320, 480)];
+    [BGImage setFrame:CGRectMake(0, 0, MainRect.size.width, MainRect.size.height)];
     [self.view addSubview:BGImage];
     [BGImage release];
 }
@@ -45,7 +48,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    NSLog(@"321321321321321");
 }
 
 - (void)didReceiveMemoryWarning

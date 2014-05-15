@@ -31,18 +31,12 @@
 
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-  /*  UIImageView *imgView = [[UIImageView alloc] initWithImage:[[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Title" ofType:@"png"inDirectory:@"Images"]]];
-	imgView.frame = CGRectMake(0, 0, 320, 44);
-	[self.navigationController.navigationBar addSubview:imgView];
-    [imgView release];*/
 
     self.navigationItem.title=@"歌星点歌";
     
-//    UIImageView * bgView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"] ]];
-//    bgView.frame=CGRectMake(0, 0, 320, 480);
-//    [self.view addSubview:bgView];
-//    [bgView release];
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    self.edgesForExtendedLayout=UIRectEdgeNone;
     
     UIImage *ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CNMen" ofType:@"png"inDirectory:@"Images/"]];
     UIImage *ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CNWomen" ofType:@"png"inDirectory:@"Images/"]]; 

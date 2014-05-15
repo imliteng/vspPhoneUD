@@ -92,7 +92,7 @@
     else
         [[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]set];
 //    [[UIColor greenColor]set];
-    [_cell.songName drawAtPoint:CGPointMake(7.0, 0.0) withFont:[UIFont fontWithName:@"MicrosoftYaHei" size:20.0]];
+    [_cell.songName drawAtPoint:CGPointMake(7.0, 0.0) withFont:[UIFont fontWithName:@"MicrosoftYaHei" size:[MyAppCell getFitFontSize:_cell.songName initSize:20.0f]]];
     /*[[UIColor whiteColor]set];
     [_cell.language drawAtPoint:CGPointMake(100.0, 5.0) withFont:[UIFont fontWithName:@"MicrosoftYaHei" size:15.0]];*/
     [[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8]set];
@@ -248,6 +248,16 @@
     [cellContentView setNeedsDisplayInRect:cellContentView.bounds];
 }
 
-
++(float)getFitFontSize:(NSString*)string initSize:(float)initSize
+{
+    CGSize stringSize ;
+    for (float i=initSize; i>0; i-=1.0f) {
+        stringSize=[string sizeWithFont:[UIFont fontWithName:@"MicrosoftYaHei" size:i]];
+        if (stringSize.width<=275.0f) {
+            return i;
+        }
+    }
+    return initSize;
+}
 
 @end

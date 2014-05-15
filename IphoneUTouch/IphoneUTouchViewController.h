@@ -75,6 +75,7 @@ BOOL IsSeledShow;
 @property (nonatomic,retain) NSArray  *elementsToParse;
 @property (nonatomic,retain) NSMutableString * workingPropertyString;
 @property(nonatomic,retain) AsyncSocket *longConnClient;
+@property(nonatomic,retain) NSTimer *reConnTimer;
 
 @property (nonatomic,assign) id<ExChangeToolBarStat> ChangeDelegate;
 

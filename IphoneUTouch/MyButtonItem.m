@@ -50,7 +50,6 @@ NSString *const kFTAnimationCallerStopSelectorKey = @"kFTAnimationCallerStopSele
         // Initialization code
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        self.backgroundColor = [UIColor blackColor];
         index = iIndex;
         
         UIImageView * bgView=[[UIImageView alloc]initWithImage:image];

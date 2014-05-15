@@ -51,6 +51,6 @@
 @property(nonatomic,retain)UIButton * button;
 @property(nonatomic,retain)UIView *cellContentView;
 @property(nonatomic,retain)UIButton * collectButton;
-
++(float)getFitFontSize:(NSString*)string initSize:(float)initSize;
 - (void)setCell:(NSString *)songname songLanguage:(NSString *)Language Singer:(NSString*) singer SingerIdString:(NSString*) singerNoString;
 @end

@@ -15,7 +15,7 @@ extern NSString * filePath;
 -(BOOL) OpenDB:(NSString *) dbName
 {
 #if TARGET_IPHONE_SIMULATOR
-    NSString *path=@"/Users/user/Desktop/project/未命名文件夹/IphoneUTouch/IphoneUTouch/Song.db";
+    NSString *path=@"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/IphoneUTouch/IphoneUTouch/Song.db";
 #else
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

@@ -113,6 +113,24 @@ CGRect MainRect;
     }
 }
 
+-(void)initFistNavigationController
+{
+    IphoneUTouchViewController* tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+    self.viewController = tmIphoneUTouchViewController;
+    [tmIphoneUTouchViewController release];
+    self.viewController.ChangeDelegate=self;
+    self.viewController.closeRoomDelegate=self;
+    [self.viewController viewDidAppear:YES];
+    
+    first=[[UINavigationController alloc]initWithRootViewController:self.viewController];
+    [self.window insertSubview:first.view atIndex:0];
+    [self.first.navigationBar setBackgroundImage:[UIImage imageNamed:@"TabBarBG.png"]  forBarMetrics:UIBarMetricsDefault];
+    
+    UIColor * color = [UIColor whiteColor];
+    NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:UITextAttributeTextColor];
+    self.first.navigationBar.titleTextAttributes = dict;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
@@ -259,9 +277,7 @@ CGRect MainRect;
             [first release];
             first=nil;
             
-            LoginViewController * tmLoginViewController=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-            self.loginViewContrl =tmLoginViewController;
-            [tmLoginViewController release];
+            loginViewContrl=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
             loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
             loginViewContrl.loginDelegate=self;
             [self.window addSubview:self.loginViewContrl.view];
@@ -304,9 +320,7 @@ CGRect MainRect;
             [first release];
             first=nil;
             
-            LoginViewController *tmLoginViewController =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-            self.loginViewContrl =tmLoginViewController;
-            [tmLoginViewController release];
+            loginViewContrl=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
             loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
             loginViewContrl.loginDelegate=self;
 //            loginViewContrl.backButton.hidden=NO;  modify by liteng for 暂时禁用 20130426
@@ -542,16 +556,8 @@ CGRect MainRect;
             loginButton.hidden=NO;
             if(!first)
             {
-                IphoneUTouchViewController * tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-                self.viewController = tmIphoneUTouchViewController;
-                [tmIphoneUTouchViewController release];
-                self.viewController.ChangeDelegate=self;
-                self.viewController.closeRoomDelegate=self;
-                [self.viewController viewDidAppear:YES];
-                
-                first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
+                [self initFistNavigationController];
                 [self.window insertSubview:first.view atIndex:0];
-                self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
             }
         }
         else
@@ -578,16 +584,8 @@ CGRect MainRect;
             {
                 if(!first)
                 {
-                    IphoneUTouchViewController * tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-                    self.viewController = tmIphoneUTouchViewController;
-                    [tmIphoneUTouchViewController release];
-                    self.viewController.ChangeDelegate=self;
-                    self.viewController.closeRoomDelegate=self;
-                    [self.viewController viewDidAppear:YES];
-                    self.viewController.title=@"优点手机";
-                    first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
+                    [self initFistNavigationController];
                     [self.window insertSubview:first.view atIndex:0];
-                    self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
                 }
             }
         }
@@ -617,16 +615,8 @@ CGRect MainRect;
         
         if(!first)
         {
-            IphoneUTouchViewController * tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-            self.viewController = tmIphoneUTouchViewController;
-            [tmIphoneUTouchViewController release];
-            self.viewController.ChangeDelegate=self;
-            self.viewController.closeRoomDelegate=self;
-            [self.viewController viewDidAppear:YES];
-            
-            first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
+            [self initFistNavigationController];
             [self.window insertSubview:first.view atIndex:0];
-            self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
         }
         
         moreButton.hidden=YES;
@@ -636,9 +626,7 @@ CGRect MainRect;
     {
         [leadViewContrl.view removeFromSuperview];
         [leadViewContrl release];
-        LoginViewController * tmLoginViewController=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-        self.loginViewContrl =tmLoginViewController;
-        [tmLoginViewController release];
+        loginViewContrl=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
         loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
         loginViewContrl.loginDelegate=self;
         [self.window addSubview:self.loginViewContrl.view];
@@ -655,16 +643,8 @@ CGRect MainRect;
     
     if(!first)
     {
-        IphoneUTouchViewController* tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-        self.viewController = tmIphoneUTouchViewController;
-        [tmIphoneUTouchViewController release];
-        self.viewController.ChangeDelegate=self;
-        self.viewController.closeRoomDelegate=self;
-        [self.viewController viewDidAppear:YES];
-        
-        first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
+        [self initFistNavigationController];
         [self.window insertSubview:first.view atIndex:0];
-        self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
     }
 }
 
@@ -731,14 +711,15 @@ CGRect MainRect;
     rockView.MyRockDelegate=self;
     [rockView.view setBackgroundColor:[UIColor grayColor]];
     
-    moreToolsView=[[MoreToolsView alloc]initWithFrame:CGRectMake(0, MainRect.size.height-111, MainRect.size.width, 111)];
+    moreToolsView=[[MoreToolsView alloc]initWithFrame:CGRectMake(0, MainRect.size.height-49, MainRect.size.width, 111)];
     moreToolsView.delegate=self;
     [self.window addSubview:moreToolsView];
     
     atmosphereViewController=[[AtmosphereViewController alloc] init];
     atmosphereViewController.myAtmosphereDelegate=self;
     
-    UIImageView * toolView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ToolBar" ofType:@"png"inDirectory:@"Images"] ]];
+    UIImageView * toolView=[[UIImageView alloc]initWithImage:
+                            [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ToolBar" ofType:@"png"inDirectory:@"Images"] ]];
     toolView.frame=CGRectMake(0,MainRect.size.height-49, 320, 49);
     [self.window addSubview:toolView];
     [toolView release];
@@ -848,16 +829,8 @@ CGRect MainRect;
         }
         else
         {
-            IphoneUTouchViewController *tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-            self.viewController = tmIphoneUTouchViewController;
-            [tmIphoneUTouchViewController release];
-            self.viewController.ChangeDelegate=self;
-            self.viewController.closeRoomDelegate=self;
-            [self.viewController viewDidAppear:YES];
-            
-            first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
+            [self initFistNavigationController];
             [self.window insertSubview:first.view atIndex:0];
-            self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
         }
     }
     else {
@@ -868,8 +841,7 @@ CGRect MainRect;
     }
     
 #if TARGET_IPHONE_SIMULATOR
-    UIColor *bgColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]]];
-    [self.window setBackgroundColor:bgColor];
+    self.window.layer.contents=(id)[[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]] CGImage];
 #else
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *uniquePath=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"background"];
@@ -877,13 +849,11 @@ CGRect MainRect;
     if (blHave) {
         NSData *data = [NSData dataWithContentsOfFile:uniquePath];
         UIImage *img = [[UIImage alloc] initWithData:data];
-        UIColor *bgColor = [UIColor colorWithPatternImage:img];
-        [self.window setBackgroundColor:bgColor];
+        self.window.layer.contents=(id)[img CGImage];
     }
     else
     {
-        UIColor *bgColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]]];
-        [self.window setBackgroundColor:bgColor];
+        self.window.layer.contents=(id)[[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]] CGImage];
     }
 #endif
 

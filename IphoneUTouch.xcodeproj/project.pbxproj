@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041B80F8192471DF0003B6E7 /* TabBarBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 041B80F7192471DF0003B6E7 /* TabBarBG.png */; };
 		B7AE000215A2B46B001074A0 /* Leading_inViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AE000015A2B46B001074A0 /* Leading_inViewController.m */; };
 		B7AE000315A2B46B001074A0 /* Leading_inViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7AE000115A2B46B001074A0 /* Leading_inViewController.xib */; };
 		B7AE001F15A2D120001074A0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AE001815A2D120001074A0 /* AddressBook.framework */; };
@@ -124,6 +125,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041B80F7192471DF0003B6E7 /* TabBarBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBG.png; sourceTree = "<group>"; };
 		B7AE000015A2B46B001074A0 /* Leading_inViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Leading_inViewController.m; path = IphoneUTouch/Leading_inViewController.m; sourceTree = "<group>"; };
 		B7AE000115A2B46B001074A0 /* Leading_inViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Leading_inViewController.xib; path = IphoneUTouch/Leading_inViewController.xib; sourceTree = "<group>"; };
 		B7AE000915A2CF58001074A0 /* ZXingWidget.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingWidget.xcodeproj; path = "../zxing-2.0/iphone/ZXingWidget/ZXingWidget.xcodeproj"; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				B7F4463D15A186A800503A3E /* Song.db */,
 				B7D81FE01599BF4B00DC556C /* navigationBarBackButton.png */,
 				B7D81FE11599BF4B00DC556C /* navigationBarBackButton@2x.png */,
+				041B80F7192471DF0003B6E7 /* TabBarBG.png */,
 				B7D81FBF15999A1F00DC556C /* Title.png */,
 				B7E2F5E61599596900A73C88 /* wryh.ttf */,
 				CE8AA433172D3BCE005EBE96 /* bk_new.png */,
@@ -610,6 +613,7 @@
 				B7F4463E15A186A800503A3E /* Song.db in Resources */,
 				B7F1EA8915A2975500DF6B27 /* LeadViewController.xib in Resources */,
 				B7AE000315A2B46B001074A0 /* Leading_inViewController.xib in Resources */,
+				041B80F8192471DF0003B6E7 /* TabBarBG.png in Resources */,
 				B7AE003515A2E8A4001074A0 /* ConnectServerFailedView.xib in Resources */,
 				B7FE6DD915AD3B8A00E28A53 /* Icon.png in Resources */,
 				B7F252FE15AEB8EF000973D9 /* Icon@2x.png in Resources */,
@@ -811,16 +815,18 @@
 		B7E2F5DF1599573500A73C88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Vision Technology Co.,Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Vision Technology Co.,Ltd";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IphoneUTouch/IphoneUTouch-Prefix.pch";
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/iphone/ZXingWidget/Classes/**",
 					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/cpp/core/src",
 				);
 				INFOPLIST_FILE = "IphoneUTouch/IphoneUTouch-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5381A28A-B60C-47A0-B3FC-08FD858D6D8C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5381A28A-B60C-47A0-B3FC-08FD858D6D8C";
@@ -832,16 +838,18 @@
 		B7E2F5E01599573500A73C88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Vision Technology Co.,Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Vision Technology Co.,Ltd";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IphoneUTouch/IphoneUTouch-Prefix.pch";
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/iphone/ZXingWidget/Classes/**",
 					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/cpp/core/src",
 				);
 				INFOPLIST_FILE = "IphoneUTouch/IphoneUTouch-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5381A28A-B60C-47A0-B3FC-08FD858D6D8C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5381A28A-B60C-47A0-B3FC-08FD858D6D8C";

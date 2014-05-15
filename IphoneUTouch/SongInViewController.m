@@ -19,6 +19,7 @@ extern BOOL IsSeledShow;
 
 extern NSString *HOST_IP;
 extern NSString *HOST_PORT;
+extern CGRect MainRect;
 
 @interface SongInViewController ()
 
@@ -89,24 +90,9 @@ extern NSString *HOST_PORT;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
-    /*add by liteng for 添加背景 20130415*/
-//    BKImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-//    NSString *uniquePath=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"background"];
-//    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:uniquePath];
-//    if (blHave)
-//    {
-//        NSData *data = [NSData dataWithContentsOfFile:uniquePath];
-//        UIImage *img = [[UIImage alloc] initWithData:data];
-//        [BKImageView setImage:img];
-//    }
-//    else
-//        [BKImageView setImage:[UIImage imageNamed:@"BK.PNG"]];
-//    [self.view addSubview:BKImageView];
-//    [BKImageView release];
     
-    /*add by liteng for 搜索功能 20130414*/
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    
     searchButton = [[UIBarButtonItem alloc]
                initWithTitle:@"查找"
                style:UIBarButtonItemStylePlain
@@ -118,14 +104,7 @@ extern NSString *HOST_PORT;
     
     mySqlite=[[LiteDateBase alloc]init];
     [mySqlite OpenDB:@"Song.db"];
-
-//    NSString *createSql=[[NSString alloc]
-//                         initWithFormat:@"create table if not EXISTS personalSongInfo(songName text,language text,singerName text,songID text,ktvID text);"];
-//    if ([mySqlite ExecSqlCmd:createSql]) {
-//        NSLog(@"create table is ok");
-//    }
-//    else
-//        NSLog(@"create table is false");
+    
     
     isSearchByABC=NO;
     isSeled=YES;
@@ -180,20 +159,7 @@ extern NSString *HOST_PORT;
         songedImage=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Songed" ofType:@"png"inDirectory:@"Images"] ]];
         songedImage.frame=CGRectMake((320-208)/2, 5, 208, 30);
         songedImage.hidden=YES;
-        [self.view addSubview:songedImage]; 
-        
-        
-       /* UIImage *downImage=[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"go-down" ofType:@"png"inDirectory:@"Images"] ];
-        UIButton *downButton =[[UIButton alloc] init];
-        CGRect frame=CGRectMake(280.0,4.0,downImage.size.width*4/5,downImage.size.height*2/3);
-        [downButton setBackgroundImage:downImage forState:UIControlStateNormal];
-        downButton.frame=frame;
-        downButton.tag=20;
-        [downButton addTarget:self action:@selector(DownPressed:)forControlEvents:UIControlEventTouchUpInside];
-        downButton.backgroundColor=[UIColor clearColor];
-        [self.view addSubview:downButton];
-        [downButton release];*/
-        
+        [self.view addSubview:songedImage];
     }
     
     [self getRecords];
@@ -201,10 +167,11 @@ extern NSString *HOST_PORT;
     self.privateSongsInfoArray=[mySqlite getAllPrivateSongsInfo]; // add by liteng for 获得私人曲库所有数据 20130427
     
     CGRect tableRect;
+    
     if(self.iType!=11)
-        tableRect=CGRectMake(0,0,320,480-44-50);
+        tableRect=CGRectMake(0,0,MainRect.size.width,MainRect.size.height-44-49);
     else
-        tableRect=CGRectMake(0,40,320,480-40-44-50);
+        tableRect=CGRectMake(0,40,MainRect.size.width,MainRect.size.height-44-49-40);
     
     MySongsInfoTable=[[UITableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
     MySongsInfoTable.backgroundColor=[UIColor clearColor];
@@ -216,6 +183,7 @@ extern NSString *HOST_PORT;
     MySongsInfoTable.rowHeight=49.5f;
     MySongsInfoTable.UserInteractionEnabled=YES;
     [self.view addSubview:MySongsInfoTable];
+    
     if (searchViewEx) 
         [self.view addSubview:searchViewEx];
     
@@ -623,6 +591,9 @@ extern NSString *HOST_PORT;
             cell.singerIdString=@"";
         }
     }
+    
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
     return cell;
 }
 
@@ -1400,9 +1371,9 @@ extern NSString *HOST_PORT;
 {
     CGRect popupRect;
     if (1==type) {
-        popupRect=CGRectMake(0,40,320,480-40-44-50);
+        popupRect=CGRectMake(0,40,MainRect.size.width,MainRect.size.height-40-44-50);
     }else if(2==type){
-        popupRect=CGRectMake(0,0,320,480-44-50);
+        popupRect=CGRectMake(0,0,MainRect.size.width,MainRect.size.height-44-50);
     }
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];

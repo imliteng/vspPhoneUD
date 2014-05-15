@@ -11,7 +11,8 @@
 #import "RequestSingers.h"
 #import "IphoneUTouchViewController.h"
 
-extern NSString* stringLogin; 
+extern NSString* stringLogin;
+extern CGRect MainRect;
 
 @interface SingersInfoViewController ()
 
@@ -60,6 +61,8 @@ extern NSString* stringLogin;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    
     bSearchByABC=NO;
     
     myRecordCount=12;
@@ -99,15 +102,15 @@ extern NSString* stringLogin;
     searchViewEx=[[UIView alloc] initWithFrame:CGRectMake(0, -40, 320, 40)];
     [self.view addSubview:searchViewEx];
     
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    
     UIImageView * searchView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Search" ofType:@"png"inDirectory:@"Images"] ]];
     searchView.frame=CGRectMake(0, 0, 320, 40);
-//    [self.view addSubview:searchView];
     [searchViewEx addSubview:searchView];
     [searchView release];
     
     searchView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Search1" ofType:@"png"inDirectory:@"Images"] ]];
     searchView.frame=CGRectMake(20, 12, 20, 20);
-//    [self.view addSubview:searchView];
     [searchViewEx addSubview:searchView];
     [searchView release];
     
@@ -201,7 +204,7 @@ extern NSString* stringLogin;
     }
 
     CGRect tableRect;
-    tableRect=CGRectMake(0,0,320,480-44-50);
+    tableRect=CGRectMake(0,0,MainRect.size.width,MainRect.size.height-44-50);
     mySingerTable=[[UITableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
     mySingerTable.backgroundColor=[UIColor clearColor];
     mySingerTable.dataSource=self;
@@ -335,6 +338,7 @@ extern NSString* stringLogin;
             [parser release];*/
         }
     }
+    [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
 }
 
@@ -574,7 +578,7 @@ extern NSString* stringLogin;
     }
     
     CGRect tableRect;
-    tableRect=CGRectMake(0,40,320,480-44-40-50);
+    tableRect=CGRectMake(0,40,MainRect.size.width,MainRect.size.height-44-40-50);
     mySingerTable=[[UITableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
     mySingerTable.backgroundColor=[UIColor clearColor];
     mySingerTable.dataSource=self;
@@ -627,9 +631,9 @@ extern NSString* stringLogin;
 {
     CGRect popupRect;
     if (1==type) {
-        popupRect=CGRectMake(0,40,320,480-40-44-50);
+        popupRect=CGRectMake(0,40,MainRect.size.width,MainRect.size.height-40-44-50);
     }else if(2==type){
-        popupRect=CGRectMake(0,0,320,480-44-50);
+        popupRect=CGRectMake(0,0,MainRect.size.width,MainRect.size.height-44-50);
     }
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];

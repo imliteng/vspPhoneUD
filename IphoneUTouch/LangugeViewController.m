@@ -36,13 +36,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title=@"语种点歌";
-    
-    /*modify by liteng for  背影图个性 20130502*/
-//    UIImageView * bgView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"] ]];
-//    bgView.frame=CGRectMake(0, 0, 320, 480);
-//    [self.view addSubview:bgView];
-//    [bgView release];
+
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    self.edgesForExtendedLayout=UIRectEdgeNone;
     
     UIImage *ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CN" ofType:@"png"inDirectory:@"Images/"]];
     UIImage *ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"HK" ofType:@"png"inDirectory:@"Images/"]]; 
@@ -50,7 +47,7 @@
     UIImage *ButtonImage3 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EN" ofType:@"png"inDirectory:@"Images/"]];
     UIImage *ButtonImage4 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"JPS" ofType:@"png"inDirectory:@"Images/"]];
     UIImage *ButtonImage5 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KRS" ofType:@"png"inDirectory:@"Images/"]];
-     UIImage *ButtonImage6 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Other" ofType:@"png"inDirectory:@"Images/"]];
+    UIImage *ButtonImage6 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Other" ofType:@"png"inDirectory:@"Images/"]];
     
     NSArray *imageArray = [NSArray arrayWithObjects:ButtonImage,ButtonImage1,ButtonImage2,ButtonImage3,ButtonImage4,ButtonImage5,nil];
     for(int i=0;i<6;i++)

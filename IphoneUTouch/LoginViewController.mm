@@ -16,6 +16,8 @@ extern NSString *stringLogin;
 extern NSString * HOST_IP;    //114.132.246.131
 extern NSString * HOST_PORT;
 
+extern CGRect MainRect;
+
 @interface LoginViewController ()
 
 @end
@@ -41,7 +43,7 @@ extern NSString * HOST_PORT;
 	// Do any additional setup after loading the view.
     
     UIImageView * bgView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"login_bg" ofType:@"png"inDirectory:@"Images"] ]]; 
-    bgView.frame=CGRectMake(0,0,320, 480);
+    bgView.frame=CGRectMake(0,0,MainRect.size.width, MainRect.size.height);
     [self.view addSubview:bgView];
     [bgView release];
      

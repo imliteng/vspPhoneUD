@@ -25,6 +25,9 @@ extern NSString * HOST_PORT;
 extern NSString * stringLogin;
 
 @interface IphoneUTouchViewController ()
+{
+    BOOL deallocFlag;
+}
 
 @end
 
@@ -38,6 +41,7 @@ extern NSString * stringLogin;
 
 @synthesize elementsToParse;
 @synthesize longConnClient;
+@synthesize reConnTimer;
 
 @synthesize ChangeDelegate;
 
@@ -74,12 +78,13 @@ extern NSString * stringLogin;
     
 	// Do any additional setup after loading the view, typically from a nib.
     self.title=@"首页";
+    
+    self.edgesForExtendedLayout=UIRectEdgeNone; 
 
+    deallocFlag=NO;
+    
     mySqlite=[[LiteDateBase alloc]init];
     [mySqlite OpenDB:@"Song.db"];
-    
-//    mySqlite=[[LiteDateBase alloc]init];
-//    [mySqlite OpenDB:@"Song.db"];
     
     /*add by liteng for 增加私人曲库表与KTV信息表 20130508*/
     NSString *createSql=@"create table if not EXISTS personalSongInfo(songName text,language text,singerName text,songID text,IsHave text);";
@@ -130,6 +135,7 @@ extern NSString * stringLogin;
     [self.view addSubview:item1];
     [item1 release];
     [image release];
+    
     //语种点歌
     rect= CGRectMake(21+21+77.5f, 20, 83.5f, 98.5);
     image=[[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Language" ofType:@"png"inDirectory:@"Images"]];
@@ -138,6 +144,7 @@ extern NSString * stringLogin;
     [self.view addSubview:item1];
     [item1 release];
     [image release];
+    
     //拼音点歌
     rect= CGRectMake(21+21+77.5f+21+77.5f, 20, 83.5f, 98.5);
     image=[[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"PinYin" ofType:@"png"inDirectory:@"Images"]];
@@ -146,6 +153,7 @@ extern NSString * stringLogin;
     [self.view addSubview:item1];
     [item1 release];
     [image release];
+    
     //新歌抢鲜
     rect= CGRectMake(21, 20+20+96, 83.5f, 98.5);
     image=[[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NewSong" ofType:@"png"inDirectory:@"Images"]];
@@ -154,6 +162,7 @@ extern NSString * stringLogin;
     [self.view addSubview:item1];
     [item1 release];
     [image release];
+    
     //热门排行
     rect= CGRectMake(21+21+77.5f, 20+20+96, 83.5f, 98.5);
     image=[[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"HotSong" ofType:@"png"inDirectory:@"Images"]];
@@ -185,6 +194,14 @@ extern NSString * stringLogin;
 
 -(void) dealloc
 {
+    NSLog(@"dealloc IphoneUTouchViewController !!! ");
+    deallocFlag=YES;
+    
+    if (reConnTimer) {
+        [reConnTimer invalidate];
+        [reConnTimer release];
+    }
+    
     [singerSelContrl release];
     [langugeSelContrl release];
     
@@ -361,9 +378,11 @@ extern NSString * stringLogin;
 
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock   
 {        
-    longConnClient = nil;  
+    longConnClient = nil;
     NSLog(@"长连接Disconnect");
-    reConnTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(OnReConnect) userInfo:nil repeats:YES];
+    if (!deallocFlag) {
+        reConnTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(OnReConnect) userInfo:nil repeats:YES];
+    }
 }   
 
 - (void)onSocketDidSecure:(AsyncSocket *)sock
@@ -466,9 +485,7 @@ extern NSString * stringLogin;
         
         SongInViewController * ContrlTmp=[[SongInViewController alloc]initWithNibAndType:@"SongInViewController" bundle:nil Type:12 Id:@"" Name:@"私人曲库" ];
         self.songInfoContrller=ContrlTmp;
-        NSLog(@"ContrlTmp==%d",[ContrlTmp retainCount]);
         [ContrlTmp release];
-        NSLog(@"ContrlTmp==%d",[ContrlTmp retainCount]);
         [self.navigationController pushViewController:self.songInfoContrller animated:YES];
     }
     
