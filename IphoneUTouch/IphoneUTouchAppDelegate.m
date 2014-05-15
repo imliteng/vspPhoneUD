@@ -13,9 +13,14 @@
 
 
 
-NSString * HOST_IP=@"192.168.2.254";    //114.132.246.131
+NSString * HOST_IP=@"192.100.110.254";    //114.132.246.131
 NSString * HOST_PORT=@"8888";
 NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
+
+NSString * DEMO_HOST_IP=@"101.36.94.204";
+NSString * DEMO_HOST_PORT=@"8888";
+
+CGRect MainRect;
 
 @implementation IphoneUTouchAppDelegate
 
@@ -113,11 +118,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
-    /*add by liteng for 增加载入图片 20130424*/
-//    laodImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 44, 320, 480)];
-//    [self.laodImageView setImage:[UIImage imageNamed:@"loading.jpg"]];
-//    [self.window insertSubview:laodImageView atIndex:0];
-//    [self.loginViewContrl release];
+    MainRect=[[UIScreen mainScreen] bounds];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     
@@ -143,205 +144,11 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
         [self.window makeKeyAndVisible];
         return  YES;
     }
-    
-    NSString * filePath=[IphoneUTouchViewController dataFilePath];
-    
-    NSString *desDirectory=[filePath stringByAppendingFormat:@"/Song.db"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:desDirectory])
-    {
-        NSString *srcDirectory =[[NSBundle mainBundle] pathForResource:@"Song" ofType:@"db"inDirectory:@"Images"];
-        [[NSFileManager defaultManager] copyItemAtPath: srcDirectory toPath:desDirectory error:nil];
-    }
-    
-    
-    /*self.viewController = [[[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil] autorelease];
-    self.window.rootViewController = self.viewController;*/
-    
-   /* self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-    self.viewController.ChangeDelegate=self;
-    self.viewController.closeRoomDelegate=self;
-    [self.viewController viewDidAppear:YES];
-    first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
-    [self.window addSubview:first.view];
-    self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];*/
-    
-//    rockView=[[RockViewController alloc] initWithFrame:CGRectMake(0.0f,0.0f, self.window.bounds.size.width, self.window.bounds.size.height)];
-    rockView=[[RockViewController alloc] init];
-    rockView.MyRockDelegate=self;
-    [rockView.view setBackgroundColor:[UIColor grayColor]];
-    
-    moreToolsView=[[MoreToolsView alloc]initWithFrame:CGRectMake(0, 431, 320, 111)];
-     moreToolsView.delegate=self;
-    [self.window addSubview:moreToolsView];
-    
-    atmosphereViewController=[[AtmosphereViewController alloc] init];
-    atmosphereViewController.myAtmosphereDelegate=self;
 
-    UIImageView * toolView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ToolBar" ofType:@"png"inDirectory:@"Images"] ]];
-    toolView.frame=CGRectMake(0, 431, 320, 49);
-    [self.window addSubview:toolView];
-    [toolView release];
+    [self initMainView];
     
-    UIImage *ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Cut1" ofType:@"png"inDirectory:@"Images/"]];
-    UIImage *ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Cut" ofType:@"png"inDirectory:@"Images/"]]; 
-    UIButton *cutButton = [[UIButton alloc] init]; 
-    [cutButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    [cutButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    cutButton.frame=CGRectMake(2, 432, 61.6f, 48);
-    cutButton.tag=1;
-    [cutButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.window addSubview:cutButton];
-    [cutButton release];
-    
-    ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"YuanChang" ofType:@"png"inDirectory:@"Images/"]];
-    ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BanChang" ofType:@"png"inDirectory:@"Images/"]]; 
-    yuanButton = [[UIButton alloc] init]; 
-    [yuanButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    yuanButton.frame=CGRectMake(2+61.6f+2, 432, 61.6f, 48);
-    yuanButton.tag=2;
-    [yuanButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.window addSubview:yuanButton];
-    
-    banButton = [[UIButton alloc] init]; 
-    [banButton setBackgroundImage:ButtonImage1 forState:UIControlStateNormal];
-    banButton.frame=CGRectMake(2+61.6f+2, 432, 61.6f, 48);
-    banButton.tag=3;
-    [banButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    banButton.hidden=YES;
-    [self.window addSubview:banButton];
-    
-    ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Play" ofType:@"png"inDirectory:@"Images/"]];
-    ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Pause" ofType:@"png"inDirectory:@"Images/"]]; 
-    playButton = [[UIButton alloc] init]; 
-    [playButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    playButton.frame=CGRectMake(2+61.6f+2+61.6f+2, 432, 61.6f, 48);
-    playButton.tag=4;
-    [playButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.window addSubview:playButton];
-    
-    pauseButton = [[UIButton alloc] init]; 
-    [pauseButton setBackgroundImage:ButtonImage1 forState:UIControlStateNormal];
-    pauseButton.frame=CGRectMake(2+61.6f+2+61.6f+2, 432, 61.6f, 48);
-    pauseButton.tag=5;
-    [pauseButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    pauseButton.hidden=YES;
-    [self.window addSubview:pauseButton];
-    
-    ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"yixuan3"  ofType:@"png"inDirectory:@"newImages/"]];
-    ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"yixuan2" ofType:@"png"inDirectory:@"newImages/"]]; 
-    UIButton *seledButton = [[UIButton alloc] init]; 
-    [seledButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    [seledButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    seledButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2, 432, 61.6f, 48);
-    seledButton.tag=6;
-    [seledButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.window addSubview:seledButton];
-    [seledButton release];
-    
-    ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"More1" ofType:@"png"inDirectory:@"Images/"]];
-    ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"More" ofType:@"png"inDirectory:@"Images/"]]; 
-    moreButton = [[UIButton alloc] init]; 
-    [moreButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    [moreButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    moreButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2+61.6f+2, 432, 61.6f, 48);
-    moreButton.tag=7;
-    [moreButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.window addSubview:moreButton];
-    
-    ButtonImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"controlbar_button_in_room_up" ofType:@"png"inDirectory:@"Images/"]];
-    ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"controlbar_button_in_room_down" ofType:@"png"inDirectory:@"Images/"]]; 
-    loginButton = [[UIButton alloc] init]; 
-    [loginButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    [loginButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    loginButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2+61.6f+2, 432, 61.6f, 48);
-    loginButton.tag=20;
-    loginButton.hidden=YES;
-    [loginButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.window addSubview:loginButton];
-    
-    /*self.loginViewContrl =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-    loginViewContrl.view.frame=CGRectMake(0, 0, 320, 480);
-    loginViewContrl.loginDelegate=self;
-    [self.window addSubview:self.loginViewContrl.view];*/
-    
-    NSString * strLogin=[IphoneUTouchViewController GetLoginString];
-    if([strLogin length]>0)
-    {
-        stringLogin=strLogin;
-        [stringLogin retain];
-        
-        int ret=[IphoneUTouchViewController GetLoginStat];
-        if(ret<0)
-        {
-            if(ret==-1)
-            {
-                UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"连接服务器失败,请确认服务器IP及端口后重新登陆" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
-                [alert release];
-            }
-            else if(ret==-2)
-            {
-                UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆失败,请确认验证码,重新登陆" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
-                [alert release];
-            }
-            leadViewContrl =[[LeadViewController alloc]initWithNibName:@"LeadViewController" bundle:nil];
-            leadViewContrl.view.frame=CGRectMake(0, 0, 320,480);
-            leadViewContrl.leadDelegate=self;
-            [self.window addSubview:leadViewContrl.view]; 
-        }
-        else
-        {
-//            [self addBackgroundPicture];
-       //     [self.laodImageView removeFromSuperview];
-            
-            self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-            self.viewController.ChangeDelegate=self;
-            self.viewController.closeRoomDelegate=self;
-            [self.viewController viewDidAppear:YES];
-            
-            first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
-            [self.window insertSubview:first.view atIndex:0];
-            self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
-        }
-    }
-    else {
-        leadViewContrl =[[LeadViewController alloc]initWithNibName:@"LeadViewController" bundle:nil];
-        leadViewContrl.view.frame=CGRectMake(0, 0, 320,480);
-        leadViewContrl.leadDelegate=self;
-        [self.window addSubview:leadViewContrl.view]; 
-    }
     [self.window makeKeyAndVisible];
-    
-#if TARGET_IPHONE_SIMULATOR
-    UIColor *bgColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]]];
-//    UIColor *bgColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bkOneX2.jpg"]];
-    [self.window setBackgroundColor:bgColor];
-#else
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *uniquePath=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"background"];
-    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:uniquePath];
-    if (blHave) {
-        NSData *data = [NSData dataWithContentsOfFile:uniquePath];
-        UIImage *img = [[UIImage alloc] initWithData:data];
-        UIColor *bgColor = [UIColor colorWithPatternImage:img];
-        [self.window setBackgroundColor:bgColor];
-    }
-    else
-    {
-        UIColor *bgColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]]];
-        [self.window setBackgroundColor:bgColor];
-    }
-#endif
-    /*add by liteng for 增回底部窗口栏 20130501*/
-    CGRect currentRect= [[UIScreen mainScreen] bounds];
-    if (568==currentRect.size.height) {
-        UIImageView * tmpview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 480, 320, 88)];
-        [tmpview setBackgroundColor:[UIColor blackColor]];
-        [self.window addSubview:tmpview];
-    }
-    WelcomeView * tmpview1=[[WelcomeView alloc] initWithFrame:CGRectMake(0, 480, 320, 88)];
-     [self.window addSubview:tmpview1];
+
     return YES;
 }
 
@@ -385,10 +192,10 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
 -(void)addBackgroundPicture
 {
 #if TARGET_IPHONE_SIMULATOR
-    BKImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 44, 320, 480)];
+    BKImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 44, MainRect.size.width, MainRect.size.height)];
     [BKImageView setImage:[UIImage imageNamed:@"BK.PNG"]];
 #else
-    BKImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 44, 320, 480)];
+    BKImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 44, MainRect.size.width, MainRect.size.height)];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *uniquePath=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"background"];
     BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:uniquePath];
@@ -452,8 +259,10 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
             [first release];
             first=nil;
             
-            self.loginViewContrl =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-            loginViewContrl.view.frame=CGRectMake(0, 0, 320, 480);
+            LoginViewController * tmLoginViewController=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
+            self.loginViewContrl =tmLoginViewController;
+            [tmLoginViewController release];
+            loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
             loginViewContrl.loginDelegate=self;
             [self.window addSubview:self.loginViewContrl.view];
         }
@@ -495,8 +304,10 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
             [first release];
             first=nil;
             
-            self.loginViewContrl =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-            loginViewContrl.view.frame=CGRectMake(0, 0, 320, 480);
+            LoginViewController *tmLoginViewController =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
+            self.loginViewContrl =tmLoginViewController;
+            [tmLoginViewController release];
+            loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
             loginViewContrl.loginDelegate=self;
 //            loginViewContrl.backButton.hidden=NO;  modify by liteng for 暂时禁用 20130426
             [self.window addSubview:self.loginViewContrl.view];
@@ -538,7 +349,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     UIImage *image= [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     //添加图片进入沙盒
     //    [self imageWithImageSimple:image scaledToSize:CGSizeMake(320, 480)];
-    [self saveImage:[self imageWithImageSimple:image scaledToSize:CGSizeMake(320, 480)] WithName:@"background"];
+    [self saveImage:[self imageWithImageSimple:image scaledToSize:CGSizeMake(MainRect.size.width, MainRect.size.height)] WithName:@"background"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     
     //    NSFileManager* fileManager=[NSFileManager defaultManager];
@@ -731,7 +542,9 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
             loginButton.hidden=NO;
             if(!first)
             {
-                self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+                IphoneUTouchViewController * tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+                self.viewController = tmIphoneUTouchViewController;
+                [tmIphoneUTouchViewController release];
                 self.viewController.ChangeDelegate=self;
                 self.viewController.closeRoomDelegate=self;
                 [self.viewController viewDidAppear:YES];
@@ -757,7 +570,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
             if(count>0)
             {
                 lead_inViewContrl=[[Leading_inViewController alloc]initWithNibName:@"Leading_inViewController" bundle:nil];
-                lead_inViewContrl.view.frame=CGRectMake(0,0,320,480);
+                lead_inViewContrl.view.frame=CGRectMake(0,0,MainRect.size.width,MainRect.size.height);
                 lead_inViewContrl.showDelegate=self;
                 [self.window addSubview:lead_inViewContrl.view];
             }
@@ -765,13 +578,14 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
             {
                 if(!first)
                 {
-                    self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+                    IphoneUTouchViewController * tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+                    self.viewController = tmIphoneUTouchViewController;
+                    [tmIphoneUTouchViewController release];
                     self.viewController.ChangeDelegate=self;
                     self.viewController.closeRoomDelegate=self;
                     [self.viewController viewDidAppear:YES];
                     self.viewController.title=@"优点手机";
                     first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
-//                    [self addBackgroundPicture];
                     [self.window insertSubview:first.view atIndex:0];
                     self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];
                 }
@@ -803,7 +617,9 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
         
         if(!first)
         {
-            self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+            IphoneUTouchViewController * tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+            self.viewController = tmIphoneUTouchViewController;
+            [tmIphoneUTouchViewController release];
             self.viewController.ChangeDelegate=self;
             self.viewController.closeRoomDelegate=self;
             [self.viewController viewDidAppear:YES];
@@ -820,8 +636,10 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     {
         [leadViewContrl.view removeFromSuperview];
         [leadViewContrl release];
-        self.loginViewContrl =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-        loginViewContrl.view.frame=CGRectMake(0, 0, 320, 480);
+        LoginViewController * tmLoginViewController=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
+        self.loginViewContrl =tmLoginViewController;
+        [tmLoginViewController release];
+        loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
         loginViewContrl.loginDelegate=self;
         [self.window addSubview:self.loginViewContrl.view];
     }
@@ -837,7 +655,9 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     
     if(!first)
     {
-        self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+        IphoneUTouchViewController* tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+        self.viewController = tmIphoneUTouchViewController;
+        [tmIphoneUTouchViewController release];
         self.viewController.ChangeDelegate=self;
         self.viewController.closeRoomDelegate=self;
         [self.viewController viewDidAppear:YES];
@@ -865,8 +685,10 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
         [first release];
         first=nil;
         
-        self.loginViewContrl =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-        loginViewContrl.view.frame=CGRectMake(0, 0, 320, 480);
+        LoginViewController* tmLoginViewController =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
+        self.loginViewContrl =tmLoginViewController;
+        [tmLoginViewController release];
+        loginViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width, MainRect.size.height);
         loginViewContrl.loginDelegate=self;
         [self.window addSubview:self.loginViewContrl.view];
     }
@@ -874,25 +696,28 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
 
 -(BOOL)didDemoLink
 {
-    self.window.rootViewController = nil;
+    HOST_IP=DEMO_HOST_IP;
+    HOST_PORT=DEMO_HOST_PORT;
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    
-    HOST_IP=@"114.132.246.134";
-    HOST_PORT=@"8888";
-
-    //NSLog(@"服务器地址为%@,端口为%@",HOST_IP,HOST_PORT);
-    
-    if(![self ConnectServer])
+    if (![self ConnectServer])
     {
-        self.connectFailedView = [[[ConnectServerFailedView alloc] initWithNibName:@"ConnectServerFailedView" bundle:nil] autorelease];
-        self.connectFailedView.MyDelegate=self;
-        self.connectFailedView.view.backgroundColor=[UIColor clearColor];
-        self.window.rootViewController = self.connectFailedView;
-        [self.window makeKeyAndVisible];
-        return  YES;
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"无法连接到演示服务器，请稍后再试"
+                                                    delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return NO;
     }
+
+    [self initMainView];
     
+    [self.window makeKeyAndVisible];
+
+    return YES;
+}
+
+
+-(void)initMainView
+{
     NSString * filePath=[IphoneUTouchViewController dataFilePath];
     
     NSString *desDirectory=[filePath stringByAppendingFormat:@"/Song.db"];
@@ -901,24 +726,12 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
         NSString *srcDirectory =[[NSBundle mainBundle] pathForResource:@"Song" ofType:@"db"inDirectory:@"Images"];
         [[NSFileManager defaultManager] copyItemAtPath: srcDirectory toPath:desDirectory error:nil];
     }
-
-    /*self.viewController = [[[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil] autorelease];
-     self.window.rootViewController = self.viewController;*/
     
-    /* self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
-     self.viewController.ChangeDelegate=self;
-     self.viewController.closeRoomDelegate=self;
-     [self.viewController viewDidAppear:YES];
-     first =[[UINavigationController alloc]initWithRootViewController:self.viewController];
-     [self.window addSubview:first.view];
-     self.first.navigationBar.tintColor = [UIColor colorWithRed:89.0/255.0 green:89.0/255.0 blue:89.0/255.0 alpha:1.0];*/
-    
-    //    rockView=[[RockViewController alloc] initWithFrame:CGRectMake(0.0f,0.0f, self.window.bounds.size.width, self.window.bounds.size.height)];
     rockView=[[RockViewController alloc] init];
     rockView.MyRockDelegate=self;
     [rockView.view setBackgroundColor:[UIColor grayColor]];
     
-    moreToolsView=[[MoreToolsView alloc]initWithFrame:CGRectMake(0, 431, 320, 111)];
+    moreToolsView=[[MoreToolsView alloc]initWithFrame:CGRectMake(0, MainRect.size.height-111, MainRect.size.width, 111)];
     moreToolsView.delegate=self;
     [self.window addSubview:moreToolsView];
     
@@ -926,7 +739,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     atmosphereViewController.myAtmosphereDelegate=self;
     
     UIImageView * toolView=[[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ToolBar" ofType:@"png"inDirectory:@"Images"] ]];
-    toolView.frame=CGRectMake(0, 431, 320, 49);
+    toolView.frame=CGRectMake(0,MainRect.size.height-49, 320, 49);
     [self.window addSubview:toolView];
     [toolView release];
     
@@ -935,7 +748,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     UIButton *cutButton = [[UIButton alloc] init];
     [cutButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
     [cutButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    cutButton.frame=CGRectMake(2, 432, 61.6f, 48);
+    cutButton.frame=CGRectMake(2, MainRect.size.height-48, 61.6f, 48);
     cutButton.tag=1;
     [cutButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.window addSubview:cutButton];
@@ -945,14 +758,14 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BanChang" ofType:@"png"inDirectory:@"Images/"]];
     yuanButton = [[UIButton alloc] init];
     [yuanButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    yuanButton.frame=CGRectMake(2+61.6f+2, 432, 61.6f, 48);
+    yuanButton.frame=CGRectMake(2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     yuanButton.tag=2;
     [yuanButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.window addSubview:yuanButton];
     
     banButton = [[UIButton alloc] init];
     [banButton setBackgroundImage:ButtonImage1 forState:UIControlStateNormal];
-    banButton.frame=CGRectMake(2+61.6f+2, 432, 61.6f, 48);
+    banButton.frame=CGRectMake(2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     banButton.tag=3;
     [banButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     banButton.hidden=YES;
@@ -962,14 +775,14 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     ButtonImage1 =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Pause" ofType:@"png"inDirectory:@"Images/"]];
     playButton = [[UIButton alloc] init];
     [playButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
-    playButton.frame=CGRectMake(2+61.6f+2+61.6f+2, 432, 61.6f, 48);
+    playButton.frame=CGRectMake(2+61.6f+2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     playButton.tag=4;
     [playButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.window addSubview:playButton];
     
     pauseButton = [[UIButton alloc] init];
     [pauseButton setBackgroundImage:ButtonImage1 forState:UIControlStateNormal];
-    pauseButton.frame=CGRectMake(2+61.6f+2+61.6f+2, 432, 61.6f, 48);
+    pauseButton.frame=CGRectMake(2+61.6f+2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     pauseButton.tag=5;
     [pauseButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     pauseButton.hidden=YES;
@@ -980,7 +793,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     UIButton *seledButton = [[UIButton alloc] init];
     [seledButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
     [seledButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    seledButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2, 432, 61.6f, 48);
+    seledButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     seledButton.tag=6;
     [seledButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.window addSubview:seledButton];
@@ -991,7 +804,7 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     moreButton = [[UIButton alloc] init];
     [moreButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
     [moreButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    moreButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2+61.6f+2, 432, 61.6f, 48);
+    moreButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     moreButton.tag=7;
     [moreButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.window addSubview:moreButton];
@@ -1001,16 +814,11 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     loginButton = [[UIButton alloc] init];
     [loginButton setBackgroundImage:ButtonImage forState:UIControlStateNormal];
     [loginButton setBackgroundImage:ButtonImage1 forState:UIControlStateHighlighted];
-    loginButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2+61.6f+2, 432, 61.6f, 48);
+    loginButton.frame=CGRectMake(2+61.6f+2+61.6f+2+61.6f+2+61.6f+2, MainRect.size.height-48, 61.6f, 48);
     loginButton.tag=20;
     loginButton.hidden=YES;
     [loginButton addTarget:self action:@selector(ButtonsPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.window addSubview:loginButton];
-    
-    /*self.loginViewContrl =[[LoginViewController alloc]initWithNibName:nil bundle:nil];
-     loginViewContrl.view.frame=CGRectMake(0, 0, 320, 480);
-     loginViewContrl.loginDelegate=self;
-     [self.window addSubview:self.loginViewContrl.view];*/
     
     NSString * strLogin=[IphoneUTouchViewController GetLoginString];
     if([strLogin length]>0)
@@ -1034,16 +842,15 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
                 [alert release];
             }
             leadViewContrl =[[LeadViewController alloc]initWithNibName:@"LeadViewController" bundle:nil];
-            leadViewContrl.view.frame=CGRectMake(0, 0, 320,480);
+            leadViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width,MainRect.size.height);
             leadViewContrl.leadDelegate=self;
             [self.window addSubview:leadViewContrl.view];
         }
         else
         {
-            //            [self addBackgroundPicture];
-            //     [self.laodImageView removeFromSuperview];
-            
-            self.viewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+            IphoneUTouchViewController *tmIphoneUTouchViewController = [[IphoneUTouchViewController alloc] initWithNibName:@"IphoneUTouchViewController" bundle:nil];
+            self.viewController = tmIphoneUTouchViewController;
+            [tmIphoneUTouchViewController release];
             self.viewController.ChangeDelegate=self;
             self.viewController.closeRoomDelegate=self;
             [self.viewController viewDidAppear:YES];
@@ -1055,11 +862,10 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
     }
     else {
         leadViewContrl =[[LeadViewController alloc]initWithNibName:@"LeadViewController" bundle:nil];
-        leadViewContrl.view.frame=CGRectMake(0, 0, 320,480);
+        leadViewContrl.view.frame=CGRectMake(0, 0, MainRect.size.width,MainRect.size.height);
         leadViewContrl.leadDelegate=self;
         [self.window addSubview:leadViewContrl.view];
     }
-    [self.window makeKeyAndVisible];
     
 #if TARGET_IPHONE_SIMULATOR
     UIColor *bgColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BG" ofType:@"jpg"inDirectory:@"Images"]]];
@@ -1080,7 +886,33 @@ NSString * stringLogin=@"00000000";//@"803621617";//@"00000000";
         [self.window setBackgroundColor:bgColor];
     }
 #endif
-    return YES;
+
+#if 0
+    /*add by liteng for 增回底部窗口栏 20130501*/
+    CGRect currentRect= [[UIScreen mainScreen] bounds];
+    if (568==currentRect.size.height) {
+        UIImageView * tmpview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 480, 320, 88)];
+        [tmpview setBackgroundColor:[UIColor blackColor]];
+        [self.window addSubview:tmpview];
+    }
+    WelcomeView * tmpview1=[[WelcomeView alloc] initWithFrame:CGRectMake(0, 480, 320, 88)];
+    [self.window addSubview:tmpview1];
+#endif
+    
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex)
+    {
+        case 0:
+            exit(1);
+            break;
+        default:
+            break;
+    }
 }
 
 @end

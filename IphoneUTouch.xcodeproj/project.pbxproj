@@ -769,8 +769,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"/Users/user/Desktop/zxing-2.0/iphone/ZXingWidget/Classes/**",
-					"/Users/user/Desktop/zxing-2.0/cpp/core/src",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/iphone/ZXingWidget/Classes/**",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/cpp/core/src",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PROVISIONING_PROFILE = "5381A28A-B60C-47A0-B3FC-08FD858D6D8C";
@@ -794,8 +794,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"/Users/user/Desktop/zxing-2.0/iphone/ZXingWidget/Classes/**",
-					"/Users/user/Desktop/zxing-2.0/cpp/core/src",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/iphone/ZXingWidget/Classes/**",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/cpp/core/src",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
@@ -816,8 +816,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IphoneUTouch/IphoneUTouch-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/zxing-2.0/iphone/ZXingWidget/Classes\"/**",
-					"\"$(SRCROOT)/zxing-2.0/cpp/core/src\"",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/iphone/ZXingWidget/Classes/**",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/cpp/core/src",
 				);
 				INFOPLIST_FILE = "IphoneUTouch/IphoneUTouch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -837,8 +837,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IphoneUTouch/IphoneUTouch-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/zxing-2.0/iphone/ZXingWidget/Classes\"/**",
-					"\"$(SRCROOT)/zxing-2.0/cpp/core/src\"",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/iphone/ZXingWidget/Classes/**",
+					"/Users/mac/Desktop/VisionProject/AppPhoneUD/IphoneUTouch_online_ios7.1/zxing-2.0/cpp/core/src",
 				);
 				INFOPLIST_FILE = "IphoneUTouch/IphoneUTouch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

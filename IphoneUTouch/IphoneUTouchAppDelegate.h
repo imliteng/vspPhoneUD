@@ -23,7 +23,7 @@
 @class IphoneUTouchViewController;
 
 
-@interface IphoneUTouchAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate,ClickPopToolDelegate,ExChangeToolBarStat,LoginDelegate,LeadLoginDelegate,ShowMenuAndInfoDelegate,CloseRoomDelegate,RockViewControllerDelegate,AtmosphereViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ConnectServerDelegate>
+@interface IphoneUTouchAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate,ClickPopToolDelegate,ExChangeToolBarStat,LoginDelegate,LeadLoginDelegate,ShowMenuAndInfoDelegate,CloseRoomDelegate,RockViewControllerDelegate,AtmosphereViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ConnectServerDelegate,UIAlertViewDelegate>
 {
     UIButton * yuanButton;
     UIButton * banButton;
